@@ -1,6 +1,8 @@
-import datasets
-import re
 import argparse
+import re
+
+import datasets
+
 
 def clean(example):
     example["short_text"] = example["short_text"].strip()
@@ -11,12 +13,14 @@ def clean(example):
     example["article"] = example["article"].strip()
     return example
 
+
 def clean_csv(path):
     dataset = datasets.load_dataset("csv", data_files=path, delimiter="\t")
-    dataset = dataset.drop_duplicates(subset=['article'], ignore_index=True)
+    dataset = dataset.drop_duplicates(subset=["article"], ignore_index=True)
     dataset = dataset.map(clean)
     dataset = dataset.sort("date", reverse=True)
     return dataset
+
 
 def main(args):
     ds = clean_csv(args.path)
@@ -24,6 +28,7 @@ def main(args):
         ds.push_to_hub(args.upload_path)
     else:
         ds.save_to_disk(args.save_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

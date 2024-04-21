@@ -1,1 +1,5 @@
 /scape.ipynb
+.idea/
+.DS_STORE
+__pycache__/
+poetry.lock

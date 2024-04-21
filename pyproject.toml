@@ -1,0 +1,61 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "tagesschau"
+version = "0.1.0"
+description = ""
+authors = ["@bjoernpl", "@mudassarzahid"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.0"
+bs4 = "^0.0.2"
+pandas = "^2.2.2"
+tqdm = "^4.66.2"
+datasets = "^2.19.0"
+
+[tool.poetry.group.dev.dependencies]
+# typing
+types-requests = "^2.31.0.20240125"
+types-dateparser = "^1.1.4.20240331"
+types-beautifulsoup4 = "^4.12.0.20240229"
+types-tqdm = "^4.66.0.20240106"
+pandas-stubs = "^2.2.1.240316"
+lxml-stubs = "^0.5.1"
+# linting
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+pydocstyle = "^6.3.0"
+isort = "^5.13.2"
+black = "^24.3.0"
+# testing
+pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
+pytest-html = "^4.1.1"
+
+# pytest
+[tool.coverage.run]
+omit = ["tests/*", "__init__.py"]
+
+# Linting
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.pydocstyle]
+convention = "google"
+add-ignore = "D100,D104"
+
+[tool.mypy]
+python_version = "3.10"
+warn_redundant_casts = "True"
+warn_unused_ignores = "True"
+warn_return_any = "True"
+warn_unused_configs = "True"
+warn_unreachable = "True"
