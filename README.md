@@ -14,14 +14,21 @@ from 01.01.2018 to 26.04.2023 [on HuggingFace](https://huggingface.co/datasets/b
 
 CSV structure:
 
-| Field            | Description                              |
-|------------------|------------------------------------------|
-| `date`           | Date of the article                      |
-| `headline`       | Title of the article                     |
-| `short_headline` | A short headline / Context               |
-| `short_text`     | A brief summary of the article           |
-| `article`        | The full text of the article             |
-| `href`           | The href of the article on tagesschau.de |
+| Field                   | Description                                                        |
+|-------------------------|--------------------------------------------------------------------|
+| `date`                  | Article date                                                       |
+| `headline`              | Article headline                                                   |
+| `short_headline`        | A short headline / Context                                         |
+| `description`           | Article lead                                                       |
+| `article_body`          | Raw article text                                                   |
+| `detailed_article_body` | Article body with text objects (subhead, time, paragraph, topline) |
+| `date_modified`         | Modified timestamp                                                 |
+| `date_published`        | Published timestamp                                                |
+| `keywords`              | List of keywords                                                   |
+| `author`                | Author object                                                      |
+| `publisher`             | Publisher object                                                   |
+| `label`                 | Article label (e.g. interview, audio)<br/>                         |    
+| `link`                  | Article link                                                       | 
 
 Size:
 
