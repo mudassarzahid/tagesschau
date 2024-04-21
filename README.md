@@ -1,28 +1,27 @@
-
 <!-- Add title image -->
 
 # [![Tagesschau Favicon](https://www.tagesschau.de/favicon.ico)](https://www.tagesschau.de/)  Tagesschau Archive Article Dataset
+
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg?style=flat)](https://www.python.org/downloads/release/python-360/)
 [![HuggingFace Datasets](https://img.shields.io/badge/huggingface-datasets-orange.svg?style=flat)](https://huggingface.co/datasets/bjoernp/tagesschau-2018-2023)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
 
 This repository contains the code for scraping every article
 from the Tagesschau.de archive. Find a deduplicated version of the dataset
 from 01.01.2018 to 26.04.2023 [on HuggingFace](https://huggingface.co/datasets/bjoernp/tagesschau-2018-2023).
 
 ## Dataset Information
+
 CSV structure:
 
-| Field | Description |
-| --- | --- |
-| `date` | Date of the article |
-| `headline` | Title of the article |
-| `short_headline` | A short headline / Context |
-| `short_text` | A brief summary of the article |
-| `article` | The full text of the article |
-| `href` | The href of the article on tagesschau.de |
+| Field            | Description                              |
+|------------------|------------------------------------------|
+| `date`           | Date of the article                      |
+| `headline`       | Title of the article                     |
+| `short_headline` | A short headline / Context               |
+| `short_text`     | A brief summary of the article           |
+| `article`        | The full text of the article             |
+| `href`           | The href of the article on tagesschau.de |
 
 Size:
 
@@ -44,13 +43,8 @@ More details in [`clean.py`](./clean.py).
 Install with:
 
 ```bash
-pip install -r requirements.txt
-```
-
-or 
-    
-```bash
-pip install beautifulsoup4 pandas tqdm
+pip install poetry
+poetry install --no-root
 ```
 
 Run with:

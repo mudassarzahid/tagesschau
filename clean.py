@@ -52,5 +52,4 @@ if __name__ == "__main__":
         default=None,
         help="The path to the HuggingFace Hub where the cleaned data should be uploaded.",
     )
-    args = parser.parse_args()
-    main(args)
+    main(parser.parse_args())

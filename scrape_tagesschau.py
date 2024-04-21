@@ -10,7 +10,8 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def get_article_bodies_multiprocessing(links):
+# TODO: Refactoring
+def get_article_bodies_multiprocessing(links: list[str]):
     with Pool(8) as p:
         results = p.map(get_article_body, links)
 
@@ -37,7 +38,7 @@ def get_article_bodies_multiprocessing(links):
     )
 
 
-def get_article_body(href):
+def get_article_body(href: str):
     """Get the article body from the href of the article.
     The HTML contains a script tag with the article body in JSON format.
 
@@ -62,26 +63,28 @@ def get_article_body(href):
         for script in scripts:
             data = json.loads(script.text)
             if data["@type"] == "NewsArticle":
-                article_with_metadata["article_body"] = data["articleBody"]
-                article_with_metadata["date_modified"] = data["dateModified"]
-                article_with_metadata["date_published"] = data["datePublished"]
-                article_with_metadata["description"] = data["description"]
-                article_with_metadata["keywords"] = data["keywords"]
-                article_with_metadata["author"] = data["author"]
-                article_with_metadata["publisher"] = data["publisher"]
+                article_with_metadata.update({
+                    "article_body": data["articleBody"],
+                    "date_modified": data["dateModified"],
+                    "date_published": data["datePublished"],
+                    "description": data["description"],
+                    "keywords": data["keywords"],
+                    "author": data["author"],
+                    "publisher": data["publisher"],
+                })
                 break
 
         detailed_article_body = []
         last_p = None
         label = None
         for element in soup.findAll(
-            ["p", "div", "h2", "span"],
-            class_=[
-                "liveblog__datetime",
-                "meldung__subhead",
-                "textabsatz",
-                "seitenkopf__label",
-            ],
+                ["p", "div", "h2", "span"],
+                class_=[
+                    "liveblog__datetime",
+                    "meldung__subhead",
+                    "textabsatz",
+                    "seitenkopf__label",
+                ],
         ):
             if element.name == "p":
                 last_p = element
@@ -115,7 +118,7 @@ def get_article_body(href):
         filtered_article_body = []
         for element in detailed_article_body:
             if not (
-                element["text"] == last_p.text and element["text"].startswith("<em>")
+                    element["text"] == last_p.text and element["text"].startswith("<em>")
             ):
                 filtered_article_body.append(element)
 
@@ -256,7 +259,7 @@ def get_articles(date):
 
 
 def generate_dates(
-    start_date=datetime.date(2018, 1, 1), end_date=datetime.date.today()
+        start_date=datetime.date(2018, 1, 1), end_date=datetime.date.today()
 ):
     """Generate a reverse chronological list of dates in the format YYYY-MM-DD.
 
@@ -343,5 +346,4 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output", type=str, default="tagesschau.csv", help="The output file"
     )
-    _args = parser.parse_args()
-    main(_args)
+    main(parser.parse_args())
